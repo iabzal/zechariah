@@ -1,4 +1,4 @@
-package iskanderzhuma
+package zechariah
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 )
 
 func (b *Bot) ConsultationCmd(upd tgbotapi.Update) {
-	message := `📲 Для консультации оставьте свой номер телефона`
+	message := `https://zechariahc.com/`
 	reply := tgbotapi.NewMessage(upd.Message.Chat.ID, fmt.Sprintf(message))
 	reply.ParseMode = "html"
 

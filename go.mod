@@ -1,4 +1,4 @@
-module github.com/iabzal/iskanderzhuma
+module github.com/iabzal/zechariah
 
 go 1.20
 

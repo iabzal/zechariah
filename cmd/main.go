@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	izbot "github.com/iabzal/iskanderzhuma"
+	izbot "github.com/iabzal/zechariah"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"log"

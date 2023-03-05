@@ -1,4 +1,4 @@
-package iskanderzhuma
+package zechariah
 
 import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
@@ -16,7 +16,7 @@ type commandKey string
 
 const (
 	StartCmdKey        = commandKey("start")
-	CalcCmdKey         = commandKey("calc")
+	AboutMeCmdKey      = commandKey("about")
 	ServiceCmdKey      = commandKey("service")
 	ContactCmdKey      = commandKey("contact")
 	ConsultationCmdKey = commandKey("consultation")
@@ -30,23 +30,23 @@ func (b *Bot) initCommands() error {
 			action: b.StartCmd,
 		},
 		{
-			key:    CalcCmdKey,
-			desc:   "Сделать расчет",
-			action: b.GetDateCmd,
+			key:    AboutMeCmdKey,
+			desc:   aboutMeTxt,
+			action: b.GetAboutMe,
 		},
 		{
 			key:    ServiceCmdKey,
-			desc:   "Мои услуги",
+			desc:   serviceTxt,
 			action: b.ServiceCmd,
 		},
 		{
 			key:    ContactCmdKey,
-			desc:   "Мои контакты",
+			desc:   contactTxt,
 			action: b.ContactCmd,
 		},
 		{
 			key:    ConsultationCmdKey,
-			desc:   "Консультация",
+			desc:   consultationTxt,
 			action: b.ConsultationCmd,
 		},
 	}
@@ -66,8 +66,8 @@ func (b *Bot) initCommands() error {
 
 func (b *Bot) replyToCommand(text string) (commandEntity, bool) {
 	switch replyKeyboardValue(text) {
-	case ReplyCalcDate:
-		cmd, ok := b.commands[CalcCmdKey]
+	case ReplyAboutMe:
+		cmd, ok := b.commands[AboutMeCmdKey]
 		return cmd, ok
 	case ReplyService:
 		cmd, ok := b.commands[ServiceCmdKey]

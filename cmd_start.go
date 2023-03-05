@@ -1,4 +1,4 @@
-package iskanderzhuma
+package zechariah
 
 import (
 	"fmt"
@@ -10,10 +10,15 @@ import (
 type replyKeyboardValue string
 
 const (
-	ReplyCalcDate     = replyKeyboardValue("Сделать расчет")
-	ReplyService      = replyKeyboardValue("Мои услуги")
-	ReplyContact      = replyKeyboardValue("Мои контакты")
-	ReplyConsultation = replyKeyboardValue("Консультация")
+	aboutMeTxt      = "Хочу узнать о себе"
+	serviceTxt      = "Мои услуги"
+	contactTxt      = "Мои контакты"
+	consultationTxt = "Консультация"
+
+	ReplyAboutMe      = replyKeyboardValue(aboutMeTxt)
+	ReplyService      = replyKeyboardValue(serviceTxt)
+	ReplyContact      = replyKeyboardValue(contactTxt)
+	ReplyConsultation = replyKeyboardValue(consultationTxt)
 )
 
 func (b *Bot) StartCmd(upd tgbotapi.Update) {
@@ -21,14 +26,14 @@ func (b *Bot) StartCmd(upd tgbotapi.Update) {
 	if name == "" {
 		name = upd.Message.From.FirstName
 	}
-	message := `Добро пожаловать в мой бот-помощник, %s!
-Здесь вы можете получить предварительный расчет.`
+	message := `Добро пожаловать, %s!
+Здесь вы можете получить информацию о себе.`
 	reply := tgbotapi.NewMessage(upd.Message.Chat.ID, fmt.Sprintf(message, name))
 	reply.ParseMode = "html"
 
 	keyboard := tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton(string(ReplyCalcDate)),
+			tgbotapi.NewKeyboardButton(string(ReplyAboutMe)),
 			tgbotapi.NewKeyboardButton(string(ReplyService)),
 		),
 		tgbotapi.NewKeyboardButtonRow(

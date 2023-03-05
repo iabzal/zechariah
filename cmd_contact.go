@@ -1,4 +1,4 @@
-package iskanderzhuma
+package zechariah
 
 import (
 	"fmt"
@@ -11,13 +11,16 @@ func (b *Bot) ContactCmd(upd tgbotapi.Update) {
 Мои контакты
 
 Телефон:
-+7 701 111 11 77
++971585876770
 
-Почта
-info@zechariah.com
+Почта:
+Z.d770@yahoo.com
+
+Сайт:
+https://zechariahc.com/
 
 Соц. сети:
-INSTAGRAM: https://instagram.com/
+INSTAGRAM: https://instagram.com/zechariah.9?igshid=YmMyMTA2M2Y=
 WHATSAPP: https://wa.me/
 	`
 	reply := tgbotapi.NewMessage(upd.Message.Chat.ID, fmt.Sprintf(message))
