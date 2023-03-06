@@ -6,7 +6,8 @@ import (
 	"go.uber.org/zap"
 )
 
-func (b *Bot) ServiceCmd(upd tgbotapi.Update) {
+func (b *Bot) ServiceCmd(upd tgbotapi.Update, questionKey int) {
+	_ = questionKey
 	message := `
 <b>Я предлагаю широкий спектр услуг, чтобы помочь вашей компании достичь успеха и стать еще более процветающей.</b>
 

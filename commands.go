@@ -8,7 +8,7 @@ type (
 	commandEntity struct {
 		key    commandKey
 		desc   string
-		action func(upd tgbotapi.Update)
+		action func(upd tgbotapi.Update, questionKey int)
 	}
 )
 

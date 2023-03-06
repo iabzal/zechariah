@@ -6,7 +6,8 @@ import (
 	"go.uber.org/zap"
 )
 
-func (b *Bot) ContactCmd(upd tgbotapi.Update) {
+func (b *Bot) ContactCmd(upd tgbotapi.Update, questionKey int) {
+	_ = questionKey
 	message := `
 Мои контакты
 

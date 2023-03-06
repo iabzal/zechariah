@@ -6,7 +6,8 @@ import (
 	"go.uber.org/zap"
 )
 
-func (b *Bot) ConsultationCmd(upd tgbotapi.Update) {
+func (b *Bot) ConsultationCmd(upd tgbotapi.Update, questionKey int) {
+	_ = questionKey
 	message := `https://zechariahc.com/`
 	reply := tgbotapi.NewMessage(upd.Message.Chat.ID, fmt.Sprintf(message))
 	reply.ParseMode = "html"

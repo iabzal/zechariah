@@ -4,19 +4,7 @@ import "unicode/utf8"
 
 func getYearDecision(number int, gender string) string {
 	var numbersDesc map[int]string
-	if gender == man {
-		numbersDesc = map[int]string{
-			1: manYearOne,
-			2: manYearTwo,
-			3: manYearThree,
-			4: manYearFour,
-			5: manYearFive,
-			6: manYearSix,
-			7: manYearSeven,
-			8: manYearEight,
-			9: manYearNine,
-		}
-	} else if gender == woman {
+	if gender == woman {
 		numbersDesc = map[int]string{
 			1: womanYearOne,
 			2: womanYearTwo,
@@ -28,25 +16,25 @@ func getYearDecision(number int, gender string) string {
 			8: womanYearEight,
 			9: womanYearNine,
 		}
+	} else {
+		numbersDesc = map[int]string{
+			1: manYearOne,
+			2: manYearTwo,
+			3: manYearThree,
+			4: manYearFour,
+			5: manYearFive,
+			6: manYearSix,
+			7: manYearSeven,
+			8: manYearEight,
+			9: manYearNine,
+		}
 	}
 	return getValidString(numbersDesc[number])
 }
 
 func getMindDecision(number int, gender string) string {
 	var numbersDesc map[int]string
-	if gender == man {
-		numbersDesc = map[int]string{
-			1: manMindOne,
-			2: manMindTwo,
-			3: manMindThree,
-			4: manMindFour,
-			5: manMindFive,
-			6: manMindSix,
-			7: manMindSeven,
-			8: manMindEight,
-			9: manMindNine,
-		}
-	} else if gender == woman {
+	if gender == woman {
 		numbersDesc = map[int]string{
 			1: womanMindOne,
 			2: womanMindTwo,
@@ -57,6 +45,18 @@ func getMindDecision(number int, gender string) string {
 			7: womanMindSeven,
 			8: womanMindEight,
 			9: womanMindNine,
+		}
+	} else {
+		numbersDesc = map[int]string{
+			1: manMindOne,
+			2: manMindTwo,
+			3: manMindThree,
+			4: manMindFour,
+			5: manMindFive,
+			6: manMindSix,
+			7: manMindSeven,
+			8: manMindEight,
+			9: manMindNine,
 		}
 	}
 	return getValidString(numbersDesc[number])

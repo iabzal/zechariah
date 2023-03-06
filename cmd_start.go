@@ -21,7 +21,8 @@ const (
 	ReplyConsultation = replyKeyboardValue(consultationTxt)
 )
 
-func (b *Bot) StartCmd(upd tgbotapi.Update) {
+func (b *Bot) StartCmd(upd tgbotapi.Update, questionKey int) {
+	_ = questionKey
 	name := upd.Message.From.UserName
 	if name == "" {
 		name = upd.Message.From.FirstName

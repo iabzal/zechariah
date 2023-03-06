@@ -15,26 +15,37 @@ func (b *Bot) Run() {
 		Timeout: 10,
 	}
 	var gender, dateOfBirth = "", ""
+	questionKey := 0
 	for upd := range b.GetUpdatesChan(updatesCfg) {
 		if upd.Message != nil {
 			if upd.Message.IsCommand() {
 				key := upd.Message.Command()
+				questionKey = 1
 				if cmd, ok := b.commands[commandKey(key)]; ok {
-					go cmd.action(upd)
+					go cmd.action(upd, questionKey)
 				} else {
 					b.logger.Error("command handler not found", zap.String("cmd", key))
 				}
 				continue
 			}
 
-			if regexp.MustCompile(`\d`).MatchString(upd.Message.Text) {
-				dateOfBirth = upd.Message.Text
-				go b.CalcDateCmd(upd, gender)
+			if cmd, ok := b.replyToCommand(upd.Message.Text); ok {
+				go cmd.action(upd, questionKey)
+				questionKey = questionKey + 1
+				continue
 			}
 
-			if cmd, ok := b.replyToCommand(upd.Message.Text); ok {
-				go cmd.action(upd)
-				continue
+			digits := regexp.MustCompile(`\D+`).ReplaceAllString(upd.Message.Text, "")
+			if len(digits) < 8 {
+				if cmd, ok := b.replyToCommand(aboutMeTxt); ok {
+					go cmd.action(upd, questionKey)
+					questionKey = questionKey + 1
+					continue
+				}
+			} else if len(digits) == 8 {
+				questionKey = 1
+				dateOfBirth = upd.Message.Text
+				go b.CalcDateCmd(upd, gender)
 			}
 		} else if upd.CallbackQuery != nil {
 			callback := tgbotapi.NewCallback(upd.CallbackQuery.ID, upd.CallbackQuery.Data)
@@ -80,7 +91,7 @@ func sendYearResult(b *Bot, upd tgbotapi.Update, gender string, dateOfBirth stri
 	}
 
 	time.Sleep(1 * time.Second)
-	info := "Чтобы еще более подробно узнать о себе, полноценно реализовать Ваш потенциал, совершить ментальное обновление Вашего сознания и квантовый скачок Вашего развития, нажмите кнопку “Готов стать лучше"
+	info := "Чтобы еще более подробно узнать о себе, полноценно реализовать Ваш потенциал, совершить ментальное обновление Вашего сознания и квантовый скачок Вашего развития, нажмите кнопку “Готов стать лучше“"
 	msgInfo := tgbotapi.NewMessage(upd.CallbackQuery.Message.Chat.ID, info)
 
 	keyboard := tgbotapi.NewInlineKeyboardMarkup(
