@@ -11,18 +11,15 @@ func (b *Bot) ContactCmd(upd tgbotapi.Update, questionKey int) {
 	message := `
 Мои контакты
 
-Телефон:
-+971585876770
-
-Почта:
-Z.d770@yahoo.com
-
-Сайт:
-https://zechariahc.com/
-
-Соц. сети:
-INSTAGRAM: https://instagram.com/zechariah.9?igshid=YmMyMTA2M2Y=
-WHATSAPP: https://wa.me/
+Telegram: @Zechariah8
+What’sApp: https://wa.me/971585681122
+www.zechariahc.com,
+www.zechariah8.com,
+www.zechariah8.vip
+E- mail: mentor@zechariah8.com
+Instagram: https://instagram.com/zechariah.9?igshid=YmMyMTA2M2Y=
+https://t.me/zechariah9
+@zechariah_help_bot
 	`
 	reply := tgbotapi.NewMessage(upd.Message.Chat.ID, fmt.Sprintf(message))
 	reply.ParseMode = "html"

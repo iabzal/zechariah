@@ -48,7 +48,7 @@ func (b *Bot) CalcDateCmd(upd tgbotapi.Update, gender string) {
 		message = `Неправильный формат.`
 	}
 
-	reply1 := tgbotapi.NewMessage(upd.Message.Chat.ID, fmt.Sprintf("Точная информация на личной консультации."))
+	reply1 := tgbotapi.NewMessage(upd.Message.Chat.ID, fmt.Sprintf("Точная информация только на личной консультации."))
 	reply1.DisableWebPagePreview = true
 
 	if err := b.apiRequest(reply1); err != nil {
@@ -65,7 +65,7 @@ func (b *Bot) CalcDateCmd(upd tgbotapi.Update, gender string) {
 	}
 	time.Sleep(1 * time.Second)
 
-	reply3 := tgbotapi.NewMessage(upd.Message.Chat.ID, "📲 хотите Я еще расскажу о вас?")
+	reply3 := tgbotapi.NewMessage(upd.Message.Chat.ID, "Рассказать о тебе еще?")
 	reply3.DisableWebPagePreview = true
 
 	keyboard := tgbotapi.NewInlineKeyboardMarkup(

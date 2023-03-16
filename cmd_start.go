@@ -27,9 +27,9 @@ func (b *Bot) StartCmd(upd tgbotapi.Update, questionKey int) {
 	if name == "" {
 		name = upd.Message.From.FirstName
 	}
-	message := `Добро пожаловать, %s!
+	message := `Добро пожаловать мой друг!
 Здесь вы можете получить информацию о себе.`
-	reply := tgbotapi.NewMessage(upd.Message.Chat.ID, fmt.Sprintf(message, name))
+	reply := tgbotapi.NewMessage(upd.Message.Chat.ID, fmt.Sprintf(message))
 	reply.ParseMode = "html"
 
 	keyboard := tgbotapi.NewReplyKeyboard(

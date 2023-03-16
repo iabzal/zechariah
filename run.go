@@ -23,6 +23,7 @@ func (b *Bot) Run() {
 				questionKey = 1
 				if cmd, ok := b.commands[commandKey(key)]; ok {
 					go cmd.action(upd, questionKey)
+					questionKey = questionKey + 1
 				} else {
 					b.logger.Error("command handler not found", zap.String("cmd", key))
 				}
@@ -72,7 +73,7 @@ func (b *Bot) Stop() {
 }
 
 func askDateOfBirth(b *Bot, upd tgbotapi.Update) {
-	msg := tgbotapi.NewMessage(upd.CallbackQuery.Message.Chat.ID, "Дата Вашего рождения,\nнапример: 24.05.1994")
+	msg := tgbotapi.NewMessage(upd.CallbackQuery.Message.Chat.ID, "Дата твоего рождения?\nНапример: 24.05.1994")
 	err := b.apiRequest(msg)
 	if err != nil {
 		return
@@ -91,12 +92,16 @@ func sendYearResult(b *Bot, upd tgbotapi.Update, gender string, dateOfBirth stri
 	}
 
 	time.Sleep(1 * time.Second)
-	info := "Чтобы еще более подробно узнать о себе, полноценно реализовать Ваш потенциал, совершить ментальное обновление Вашего сознания и квантовый скачок Вашего развития, нажмите кнопку “Готов стать лучше“"
+	readyToGetBetter := "Готов стать лучше"
+	if gender == woman {
+		readyToGetBetter = "Готова стать лучше"
+	}
+	info := "Чтобы еще более подробно узнать о себе, полноценно реализовать Ваш потенциал, совершить ментальное обновление Вашего сознания и квантовый скачок Вашего развития, нажмите кнопку “" + readyToGetBetter + "“"
 	msgInfo := tgbotapi.NewMessage(upd.CallbackQuery.Message.Chat.ID, info)
 
 	keyboard := tgbotapi.NewInlineKeyboardMarkup(
 		tgbotapi.NewInlineKeyboardRow(
-			tgbotapi.NewInlineKeyboardButtonData("Готов стать лучше", "https://zechariahc.com/"),
+			tgbotapi.NewInlineKeyboardButtonData(readyToGetBetter, "https://zechariahc.com/"),
 		),
 	)
 	msgInfo.ReplyMarkup = keyboard
